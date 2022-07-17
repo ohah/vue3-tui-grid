@@ -1,24 +1,6 @@
-## tui.grid
-
-[https://github.com/nhn/tui.grid](https://github.com/nhn/tui.grid)
-
-Vue 3 + TypeScript + Vite
-
-## Demo
-
-[https://github.com/nhn/tui.grid/tree/master/packages/toast-ui.vue-grid](https://github.com/nhn/tui.grid/tree/master/packages/toast-ui.vue-grid)
-
-
-## Install
-
-npm install vue3-tui-grid
-
-
-## License
-
 MIT License
 
-Copyright (c) 2022 ohah Cloud Corp.
+Copyright (c) 2022 ohah.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

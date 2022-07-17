@@ -41,9 +41,6 @@ onMounted(()=>{
     ref="GridTable"
     :data="data"
     :columns="columns"
-    @selection="check"
-    @click="sort"
-    @dblclick="sort"
   >
   </tui-grid>
 </template>
