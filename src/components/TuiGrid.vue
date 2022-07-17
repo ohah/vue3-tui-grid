@@ -1,8 +1,8 @@
 <script lang="ts">
+import "tui-grid/dist/tui-grid.css";
 import { defineComponent, onMounted, onUnmounted, PropType, ref } from 'vue'
 import Grid from 'tui-grid';
-import 'tui-grid/dist/tui-grid.css';
-import { GridEventListener, GridEventName, OptColumn, OptGrid, OptI18nData, OptPreset, OptThemePresetNames } from 'tui-grid/types/options';
+import { GridEventListener, GridEventName, OptColumn, OptGrid, OptI18nData, OptPreset, OptRow, OptThemePresetNames } from 'tui-grid/types/options';
 const presetTheme = ['default', 'striped', 'clean'];
 const presetLanguage = ['en', 'ko'];
 export default defineComponent({
@@ -11,7 +11,7 @@ export default defineComponent({
 </script>
 <script lang="ts" setup>
 import { useSlots, useAttrs } from 'vue'
-import { VueCellRenderer, VueCellEditorRenderer } from './Renderer';
+import { VueCellRenderer, VueCellEditorRenderer } from '../Renderer';
 type GridEventNameEmits<T> = { 
 	(e: T, ...args:any) : void;
 };
@@ -21,7 +21,7 @@ const attrs = useAttrs();
 const tuiGrid = ref<HTMLElement>();
 const props = defineProps({
 	data: {
-		type: [Array, Object],
+		type: Array as PropType<OptRow[]>,
 		required: true,
 	},
 	columns: {
@@ -36,7 +36,6 @@ const props = defineProps({
 	},
 });
 let Instance: Grid|null = null;
-const data = ref<any>({});
 onMounted(()=> {
 	// console.log('slots', slots.default());
 	if(slots) {
@@ -95,7 +94,7 @@ onMounted(()=> {
 		el: tuiGrid.value,
 		data: props.data,
 		columns: columns,
-	});
+	}) as OptGrid;
 	Instance = new Grid(options);
 	for(const _eventName of Object.keys(attrs)) {
 		const eventName = _eventName.substring(0, 2) === "on" ? _eventName.substring(2, _eventName.length).toLowerCase() as GridEventName : '';

@@ -1,31 +1,49 @@
 <script setup lang="ts">
-import { OptColumn } from 'tui-grid/types/options';
+import { TuiGridElement } from '@/TuiGridPlugin';
+import { OptColumn, OptRow } from 'tui-grid/types/options';
 import { CellRendererProps } from 'tui-grid/types/renderer';
 import { onMounted, ref } from 'vue';
-import { TuiGridElement } from './TuiGrid';
 import { VueCellRenderer } from "./Renderer"
-// import TuiGrid from './TuiGrid.vue';
-const data = ref([
-  // for rowData prop
+const data = ref<OptRow[]>([
   {
-    name: 'test',
-    artist: 'Birdy'
+    id: '10012',
+    city: 'Seoul',
+    country: 'South Korea'
   },
   {
-    name: 'X',
-    artist: 'Ed Sheeran'
+    id: '10013',
+    city: 'Tokyo',
+    country: 'Japan'    
+  },
+  {
+    id: '10014',
+    city: 'London',
+    country: 'England'
+  },
+  {
+    id: '10015',
+    city: 'Ljubljana',
+    country: 'Slovenia'
+  },
+  {
+    id: '10016',
+    city: 'Reykjavik',
+    country: 'Iceland'
   }
 ]);
 const columns = ref<OptColumn[]>([
   {
-    header: 'Name',
-    name: 'name',
-    sortable: true,
+    header: 'ID',
+    name: 'id'
   },
   {
-    header: 'Artist',
-    name: 'artist',
-    sortable: true,
+    header: 'CITY',
+    name: 'city',
+    editor: 'text'
+  },
+  {
+    header: 'COUNTRY',
+    name: 'country'
   }
 ]);
 const GridTable = ref<TuiGridElement>();
@@ -46,5 +64,4 @@ onMounted(()=>{
 </template>
 
 <style scoped>
-.w-100{width:100%}
 </style>

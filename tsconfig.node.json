@@ -1,8 +1,10 @@
 {
+
   "compilerOptions": {
     "composite": true,
     "module": "esnext",
-    "moduleResolution": "node"
+    "moduleResolution": "node", 
+    "types": ["node", "vitest"],
   },
-  "include": ["vite.config.js"]
+  "include": ["vite.config.*"]
 }

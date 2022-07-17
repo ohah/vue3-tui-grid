@@ -1,7 +1,7 @@
 {
   "name": "vue3-tui-grid",
   "private": false,
-  "version": "0.0.11",
+  "version": "0.0.1",
   "description": "vue3-tui-grid is a Vue.js component library for tui-grid(NHN) https://github.com/nhn/tui.grid",
   "keywords": [
     "tui-grid",
@@ -13,16 +13,21 @@
     "name": "ohah",
     "url": "https://github.com/ohah/vue3-tui-grid"
   },
-  "files": ["dist"],
-  "main": "./dist/vue3-tui-grid.umd.js",
-  "module": "./dist/vue3-tui-grid.es.js",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "exports": {
-    ".": {
-      "import": "./dist/vue3-tui-grid.es.js",
-      "require": "./dist/vue3-tui-grid.umd.js"
-    },
-    "./dist/style.css": "./dist/style.css"
+    ".": "./dist/index.js",
+    "./style.css": "./dist/style.css"
   },
+  "browser": {
+    "./style.css": "./dist/style.css"
+  },
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/TuiGridPlugin.d.ts",
   "repository": {
     "type": "git",
     "url": "git://github.com/ohah/vue3-tui-grid"
@@ -33,21 +38,19 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --port 5050",
+    "typecheck": "vue-tsc --noEmit"
   },
-  "types": "dist/index.d.ts",
-  "browser": "./browser/specific/main.js",
   "dependencies": {
-    "@revolist/vue3-datagrid": "^3.1.0",
     "tui-grid": "^4.21.2",
-    "vue": "^3.2.25",
-    "vue-router": "^4.1.1",
-    "vue3-excel-editor": "^1.0.7"
+    "vue": "^3.2.37"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.3.3",
+    "@types/node": "^18.0.5",
+    "@vitejs/plugin-vue": "^3.0.0",
+    "rollup-plugin-typescript2": "^0.32.1",
     "typescript": "^4.7.4",
-    "vite": "^2.9.9",
-    "vue-tsc": "^0.34.7"
+    "vite": "^3.0.0",
+    "vue-tsc": "^0.38.5"
   }
 }
