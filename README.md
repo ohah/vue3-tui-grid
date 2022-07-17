@@ -1,24 +1,100 @@
 ## tui.grid
-
 [https://github.com/nhn/tui.grid](https://github.com/nhn/tui.grid)
-
-Vue 3 + TypeScript + Vite
-
 ## Demo
 
 [https://github.com/nhn/tui.grid/tree/master/packages/toast-ui.vue-grid](https://github.com/nhn/tui.grid/tree/master/packages/toast-ui.vue-grid)
 
-
+## vue3-tui-grid
+Vue 3 + TypeScript + Vite
 ## Install
 
+```shell
 npm install vue3-tui-grid
+```
 
+## How to use
+
+#### main.ts(main.js)
+```typescript
+import { createApp } from 'vue'
+import './style.css'
+import App from './App.vue'
+import TuiGrid from "vue3-tui-grid"
+import 'tui-grid/dist/tui-grid.css';
+createApp(App).use(TuiGrid).mount('#app')
+```
+
+#### use Vue
+```html
+<script setup lang="ts">
+import { TuiGridElement } from "vue3-tui-grid"
+import { OptColumn, OptRow } from 'tui-grid/types/options';
+import { onMounted, ref } from 'vue';
+const data = ref<OptRow[]>([
+  {
+    id: '10012',
+    city: 'Seoul',
+    country: 'South Korea'
+  },
+  {
+    id: '10013',
+    city: 'Tokyo',
+    country: 'Japan'    
+  },
+  {
+    id: '10014',
+    city: 'London',
+    country: 'England'
+  },
+  {
+    id: '10015',
+    city: 'Ljubljana',
+    country: 'Slovenia'
+  },
+  {
+    id: '10016',
+    city: 'Reykjavik',
+    country: 'Iceland'
+  }
+]);
+const columns = ref<OptColumn[]>([
+  {
+    header: 'ID',
+    name: 'id'
+  },
+  {
+    header: 'CITY',
+    name: 'city',
+    editor: 'text'
+  },
+  {
+    header: 'COUNTRY',
+    name: 'country'
+  }
+]);
+const GridTable = ref<TuiGridElement>();
+onMounted(()=>{
+  const instance = GridTable.value;
+  instance?.applyTheme("striped");
+  GridTable.value?.setLanguage("ko");
+});
+</script>
+
+<template>
+  <tui-grid 
+    ref="GridTable"
+    :data="data"
+    :columns="columns"
+  >
+  </tui-grid>
+</template>
+```
 
 ## License
 
 MIT License
 
-Copyright (c) 2022 ohah Cloud Corp.
+Copyright (c) 2022 ohah.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

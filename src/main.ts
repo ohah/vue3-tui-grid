@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import TuiGridPlugin from './TuiGridPlugin'
+import TuiGrid from './TuiGridPlugin'
 
 const app = createApp(App);
-app.use(TuiGridPlugin).mount('#app')
-
+app.use(TuiGrid).mount('#app')

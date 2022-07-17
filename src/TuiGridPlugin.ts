@@ -10,23 +10,21 @@ interface Vue3OptColumn extends OptColumn {
 
 interface TuiGridElement extends DefineComponent {
   /**
-   * 함수 실행
-   * @param methodName https://nhn.github.io/tui.grid/latest/ 참조
-   * @param args 객체
+   * @param methodName https://nhn.github.io/tui.grid/latest
+   * @param args 
    */
   invoke(methodName: string, ...args: any): void;
   /**
-   * 언어 설정
    * @param localeCode "ko" | "en"
    */
   setLanguage(localeCode: string, data?: OptI18nData): void;
   /**
-   * 테마 적용
+   * applyTheme
    * @param theme "default" | "striped" | "clean"
    */
   applyTheme(presetName: OptThemePresetNames, extOptions?: OptPreset): void;
   /**
-   * Grid 객체
+   * Grid
    */
   gridInstance: Grid;
   /**

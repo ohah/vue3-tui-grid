@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { TuiGridElement } from '@/TuiGridPlugin';
 import { OptColumn, OptRow } from 'tui-grid/types/options';
-import { CellRendererProps } from 'tui-grid/types/renderer';
 import { onMounted, ref } from 'vue';
-import { VueCellRenderer } from "./Renderer"
 const data = ref<OptRow[]>([
   {
     id: '10012',
