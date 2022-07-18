@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { TuiGridElement } from '@/TuiGridPlugin';
+import { TuiGridElement, Vue3OptColumn } from '@/TuiGridPlugin';
 import { OptColumn, OptRow } from 'tui-grid/types/options';
 import { onMounted, ref } from 'vue';
+import { Cell, EditorCell } from "./components";
 const data = ref<OptRow[]>([
   {
     id: '10012',
@@ -29,26 +30,38 @@ const data = ref<OptRow[]>([
     country: 'Iceland'
   }
 ]);
-const columns = ref<OptColumn[]>([
+const columns = ref<Vue3OptColumn[]>([
   {
     header: 'ID',
-    name: 'id'
+    name: 'id',
+    component:{
+      renderer: Cell,
+    },
   },
   {
     header: 'CITY',
     name: 'city',
-    editor: 'text'
+    editor:{
+      type: "datePicker"
+    }
   },
   {
     header: 'COUNTRY',
-    name: 'country'
+    name: 'country',
+    component:{
+      editor: EditorCell,
+    },
+    sortable:true,
   }
 ]);
 const GridTable = ref<TuiGridElement>();
 onMounted(()=>{
-  const instance = GridTable.value;
-  instance?.applyTheme("striped");
-  GridTable.value?.setLanguage("ko");
+  const grid = GridTable.value;
+  grid?.applyTheme("striped");
+  grid?.setLanguage("ko");
+  const instance = grid?.gridInstance;
+  instance.setWidth(500);
+  grid.invoke("setWidth", 500);
 });
 </script>
 

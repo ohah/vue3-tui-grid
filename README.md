@@ -21,6 +21,7 @@ import './style.css'
 import App from './App.vue'
 import TuiGrid from "vue3-tui-grid"
 import 'tui-grid/dist/tui-grid.css';
+import "tui-date-picker/dist/tui-date-picker.css"; // use datepicker
 createApp(App).use(TuiGrid).mount('#app')
 ```
 
@@ -74,9 +75,12 @@ const columns = ref<OptColumn[]>([
 ]);
 const GridTable = ref<TuiGridElement>();
 onMounted(()=>{
-  const instance = GridTable.value;
-  instance?.applyTheme("striped");
-  GridTable.value?.setLanguage("ko");
+  const grid = GridTable.value;
+  grid?.applyTheme("striped");
+  grid?.setLanguage("ko");
+  const instance = grid?.gridInstance;
+  instance.setWidth(500);
+  grid.invoke("setWidth", 500);
 });
 </script>
 
