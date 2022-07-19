@@ -1,8 +1,7 @@
 import { TuiGrid } from "@/components";
 import type { App, Component, DefineComponent } from "vue";
 import Grid from "tui-grid";
-import { OptThemePresetNames, OptI18nData, OptPreset, OptColumn } from "tui-grid/types/options";
-import { VueCellRenderer } from "@/Renderer";
+import { OptThemePresetNames, OptI18nData, OptPreset, OptColumn, OptGrid } from "tui-grid/types/options";
 
 interface Vue3OptColumn extends OptColumn {
   component?: {
