@@ -5,15 +5,13 @@ import { defineComponent, onMounted, onUnmounted, PropType, ref } from 'vue'
 import Grid from 'tui-grid';
 import { GridEventName, OptGrid, OptI18nData, OptPreset, OptRow, OptThemePresetNames } from 'tui-grid/types/options';
 import { Vue3OptColumn } from '@/TuiGridPlugin';
-const presetTheme = ['default', 'striped', 'clean'];
-const presetLanguage = ['en', 'ko'];
 export default defineComponent({
 	name: "TuiGrid",
 })
 </script>
 <script lang="ts" setup>
-import { useSlots, useAttrs } from 'vue'
-import { VueCellRenderer, VueCellEditorRenderer } from '../Renderer';
+import { useAttrs } from 'vue'
+import { VueCellEditorRenderer, VueCellRenderer } from "@/renderer";
 type GridEventNameEmits<T> = { 
 	(e: T, ...args:any) : void;
 };
@@ -58,6 +56,7 @@ onMounted(()=> {
 		return columns;
 	});
 	const options = Object.assign(props.options || {}, attrs, {
+		...props.options,
 		el: tuiGrid.value,
 		data: props.data,
 		columns: columns,
