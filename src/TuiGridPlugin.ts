@@ -1,7 +1,16 @@
 import { TuiGrid } from "@/components";
 import type { App, Component, DefineComponent } from "vue";
 import Grid from "tui-grid";
-import { OptThemePresetNames, OptI18nData, OptPreset, OptColumn, OptGrid } from "tui-grid/types/options";
+import { OptThemePresetNames, OptI18nData, OptPreset, OptColumn, OptGrid, OptHeader, OptColumnHeaderInfo } from "tui-grid/types/options";
+
+interface Vue3OptGrid extends Partial<Omit<OptGrid, "el">> {
+  header?: OptHeader & {
+    columns?: OptColumnHeaderInfo[] & {
+      component?: Component;
+    }[]
+  };
+  
+}
 
 interface Vue3OptColumn extends OptColumn {
   component?: {
@@ -42,4 +51,4 @@ export default {
 };
 
 export { TuiGrid };
-export type { TuiGridElement, Vue3OptColumn }
+export type { TuiGridElement, Vue3OptColumn, Vue3OptGrid };
