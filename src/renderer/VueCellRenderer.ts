@@ -20,7 +20,6 @@ export default class VueCellRenderer implements CellRenderer {
   }>
   app: Vue.App;
   constructor(props:CellRendererProps) {
-    // const { slot } = (props as VueCellProps).columnInfo.renderer.options;
     this.el = document.createElement('div');
     const { columnInfo } = props as VueCellProps;
     if(columnInfo.renderer.options.component) {

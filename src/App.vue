@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { TuiGridElement, Vue3OptColumn } from '@/TuiGridPlugin';
-import { OptColumn, OptRow } from 'tui-grid/types/options';
+import { TuiGridElement, Vue3OptColumn, Vue3OptGrid } from '@/TuiGridPlugin';
+import { OptRow } from 'tui-grid/types/options';
 import { onMounted, ref } from 'vue';
-import { Cell, EditorCell } from "./components";
+import { Cell, EditorCell, HeaderCell } from "./components";
 const data = ref<OptRow[]>([
   {
     id: '10012',
@@ -53,12 +53,16 @@ const columns = ref<Vue3OptColumn[]>([
     component: {
       renderer: Cell,
     },
+    sortable: true,
   },
   {
     header: 'CITY',
     name: 'city',
     editor: {
       type: "datePicker"
+    },
+    validation: {
+      dataType: 'number'
     }
   },
   {
@@ -70,21 +74,38 @@ const columns = ref<Vue3OptColumn[]>([
     sortable: true,
   }
 ]);
+const options = ref<Vue3OptGrid>({
+  draggable:true,
+  summary:{
+    position:'bottom',
+    height:30,
+    columnContent:{
+      city:{
+        template() {
+          return "<div><strong>test</strong>ㅁㄴㅇㄹ</div>";
+        },
+        useAutoSummary:true,
+      }
+    }
+  },
+  header:{
+    columns:[{
+      name:'id',
+      component:HeaderCell,
+    }]
+  },
+})
 const GridTable = ref<TuiGridElement>();
 onMounted(() => {
   const grid = GridTable.value;
   grid?.applyTheme("striped");
   grid?.setLanguage("ko");
   const instance = grid?.gridInstance;
-  // instance.setWidth("100%");
+  // instance.setWidth("500px");
   // grid.invoke("setWidth", "100%");
 });
 </script>
 
 <template>
-  <tui-grid ref="GridTable" :data="data" :columns="columns" :options="{'rowHeaders' : rowHeaders}">
-  </tui-grid>
+  <tui-grid ref="GridTable" :data="data" :columns="columns" :options="options" />
 </template>
-
-<style scoped>
-</style>

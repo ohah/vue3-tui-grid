@@ -11,7 +11,7 @@ export default defineComponent({
 </script>
 <script lang="ts" setup>
 import { useAttrs } from 'vue'
-import { VueCellEditorRenderer, VueCellRenderer } from "@/renderer";
+import { VueCellEditorRenderer, VueCellRenderer, VueHeaderRenderer } from "@/renderer";
 type GridEventNameEmits<T> = { 
 	(e: T, ...args:any) : void;
 };
@@ -55,6 +55,28 @@ onMounted(()=> {
 		}
 		return columns;
 	});
+	if(props.options && props.options.header?.columns) {
+		props.options.header.columns.map((header) => {
+			header.renderer = VueHeaderRenderer;
+			columns.map((col) => {
+				if(col.name === header.name) {
+					if(!col.renderer) {
+						col.renderer = {};
+						(col.renderer as any).options = {
+							// ...(col.renderer as any).options,
+							header: (header as any).component,						
+						}
+					} else {
+						(col.renderer as any).options = {
+							...(col.renderer as any).options,
+							header: (header as any).component,						
+						}
+					}
+				}
+				return columns;
+			});
+		})
+	}
 	const options = Object.assign(props.options || {}, attrs, {
 		...props.options,
 		el: tuiGrid.value,
