@@ -44,6 +44,12 @@ interface TuiGridElement extends DefineComponent {
   rootElement: HTMLElement;
 }
 
+declare module '@vue/runtime-core' {
+  export interface GlobalComponents {
+    TuiGrid: typeof TuiGrid,
+  }
+}
+
 export default {
   install: (app: App) => {
     app.component("tui-grid", TuiGrid);

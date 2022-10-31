@@ -4,13 +4,13 @@ import "tui-date-picker/dist/tui-date-picker.css";
 import { defineComponent, onMounted, onUnmounted, PropType, ref } from 'vue'
 import Grid from 'tui-grid';
 import { GridEventName, OptGrid, OptI18nData, OptPreset, OptRow, OptThemePresetNames } from 'tui-grid/types/options';
-import { Vue3OptColumn } from '@/TuiGridPlugin';
+import { Vue3OptColumn, Vue3OptGrid } from '@/TuiGridPlugin';
 export default defineComponent({
 	name: "TuiGrid",
 })
 </script>
 <script lang="ts" setup>
-import { useAttrs } from 'vue'
+import { useAttrs, toRaw } from 'vue'
 import { VueCellEditorRenderer, VueCellRenderer, VueHeaderRenderer } from "@/renderer";
 type GridEventNameEmits<T> = { 
 	(e: T, ...args:any) : void;
@@ -19,16 +19,27 @@ const emit = defineEmits<GridEventNameEmits<GridEventName>>()
 const attrs = useAttrs();
 const tuiGrid = ref<HTMLElement>();
 const props = defineProps({
+	/**
+	 * @type {OptRow[]}
+	 * @required
+	 */
 	data: {
 		type: Array as PropType<OptRow[]>,
 		required: true,
 	},
+	/**
+	 * @type {Vue3OptColumn[]}
+	 * @required
+	 */
 	columns: {
 		type: Array as PropType<Vue3OptColumn[]>,
 		required: true,
 	},
+	/**
+	 * @type {Vue3OptGrid[]}
+	 */
 	options: {
-		type: Object as PropType<OptGrid>,
+		type: Object as PropType<Vue3OptGrid>,
 		default() {
 			return {};
 		},
@@ -55,8 +66,8 @@ onMounted(()=> {
 		}
 		return columns;
 	});
-	if(props.options && props.options.header?.columns) {
-		props.options.header.columns.map((header) => {
+	if(props.options && (props.options as OptGrid).header?.columns) {
+		(props.options as OptGrid).header.columns.map((header) => {
 			header.renderer = VueHeaderRenderer;
 			columns.map((col) => {
 				if(col.name === header.name) {
@@ -95,10 +106,10 @@ onMounted(()=> {
 });
 defineExpose({
 	get gridInstance() {
-		return Instance.value;
+		return toRaw(Instance.value);
 	},
 	get rootElement() {
-		return tuiGrid.value;
+		return toRaw(tuiGrid.value);
 	},
 	setLanguage(localeCode: string, data?: OptI18nData) {
 		if(Instance) {
